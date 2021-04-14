@@ -52,7 +52,8 @@ filter(diamonds, carat > 3)
 2.2.1. Using the polls_us_election_2016data frame in the ds labs package find the following
 2.2.1.1. Polls for the states of Hawaii and Alaska
 ```{r}
-ggplot(data = polls_us_election_2016, mapping = aes(x = year, y = gdp_c))+
+Alaska_Hawaii <- polls_us_election_2016$state
+ggplot(data = polls_us_election_2016, mapping = aes(x = pollster, y = gdp_c))+
 geom_line()
 ```
 
