@@ -1,0 +1,61 @@
+---
+title: "ProblemSet2Skills"
+author: "Vera Jónsdóttir"
+date: "4/12/2021"
+output: html_document
+---
+
+```{r}
+install.packages("dslabs")
+install.packages("ggplot2")
+library(ggplot2)
+```
+
+
+1 Git Concepts
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# git is a software for distributed version control. List 4 benefits of 
+# distributed version control.
+?git
+```
+2.1  Debugging mindset
+2.1.1
+```{r}
+my_variable <- 10
+my_varıable
+```
+This code runs smoothly in my laptop. However, there may be an issue with 
+running the second variable as it is not written in the same way as the first
+line of code.
+
+2.1.2 Fix the following code so it works
+```{r}
+
+View(polls_us_election_2016)
+library(dslabs)
+ggplot(data = polls_us_election_2016) +
+  geom_point(mapping = aes(x = startdate,
+                           y = rawpoll_trump))
+
+filter(data = polls_us_election_2016, state = Florida)
+filter(diamonds, carat > 3)
+?diamonds
+
+```
+2.1.3.Press Alt (Option) + Shift + K. What happens? How can you get to the same place using the menus?
+```{r}
+#Alt (Option) + Shift + K shows us a preview of Keyboard Shortcut Quick References
+```
+
+2.2  Filter 
+2.2.1. Using thepolls_us_election_2016data frame in thedslabspackage find the following
+2.2.1.1. Polls for the states of Hawaii and Alaska
+```{r}
+ggplot(data = polls_us_election_2016, mapping = aes(x = year, y = gdp_c))+
+geom_line()
+```
+
+
+
+
