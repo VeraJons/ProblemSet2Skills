@@ -11,6 +11,7 @@ install.packages("ggplot2")
 library(ggplot2)
 library(dslabs)
 library(tidyverse)
+library(dplyr)
 ```
 
 
@@ -105,10 +106,33 @@ There is no n/a that comes up when we search specifically for a particular lette
 
 2.2.2.4
 ```{r}
-filter(polls_us_election_2016, is.na(grade) | as.numeric(grade)>0)
+filter(polls_us_election_2016,  is.na(grade) | as.numeric(grade)>0)
+```
+It leads to printing of all columns with every possible grade and n/a as well.
+
+2.2.2.5
+```{r}
+filter(polls_us_election_2016,  is.na(grade) | as.numeric(grade) == 0)
+
+```
+Here we will only get the N/A columns.
+
+2.3.1
+```{r}
+select(polls_us_election_2016, grade, grade, grade)
+```
+Nothing changes if you repeat the sane variable multiple times
+
+2.3.2
+```{r}
+select(polls_us_election_2016, contains("RAW", ignore.case=FALSE))
+ignore.case?
+```
+2.3.3
+```{r}
+
 ```
 
- 
 
 
 
