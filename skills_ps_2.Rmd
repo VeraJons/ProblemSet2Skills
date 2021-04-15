@@ -150,19 +150,116 @@ polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_clinton)))
 ```
 4.1
 ```{r}
-df <- polls_us_election_2016 %>% 
+rawcandidate <- polls_us_election_2016 %>% 
   mutate(raw_trump=rawpoll_trump/100*samplesize) %>%       
   mutate(raw_clinton=rawpoll_clinton/100*samplesize) %>%
    mutate(raw_johnson=rawpoll_johnson/100*samplesize) %>%       
   mutate(raw_mcmullin=rawpoll_mcmullin/100*samplesize)
 
-df
+rawcandidate
 ```
 4.2
 ```{r}
+df1 <- rawcandidate %>% 
+  mutate(new_variable=samplesize-(raw_trump+raw_clinton))
+ggplot(data = df1,
+       mapping = aes(x = startdate,
+                     y = new_variable)) +
+  geom_point() +
+  geom_smooth(se=TRUE)
+```
+4.3
+```{r}
+df2 <- df %>% 
+  mutate(new_variable=samplesize-(raw_trump+raw_clinton+raw_johnson+raw_mcmullin))
+ggplot(data = df2,
+       mapping = aes(x = startdate,
+                     y = new_variable)) +
+  geom_point() +
+  geom_smooth(se=TRUE)
+```
+4.4
+The reason why is because Johnson is such a big candidate and he polled very well close to the election. We also need to take McMuller out of the picture although he was less significant. He polled very well in Utah for example with 21.5 percent of the votes and third in Idaho.
+
+4.5
+Ths mostly fixes the problem since Johnson was such a big candidate and when he is out of the picture, there is very little disturbing the data.
+
+4.6
+```{r}
+polls_us_election_2016 %>%
+ select(startdate, pollster, rawpoll_johnson) %>%
+ group_by(startdate) %>%
+ mutate(rank = min_rank(desc(rawpoll_johnson)),ties.method = 'first')%>%
+  head(20)
+
+```
+We break ties with the first row that comes up.
+
+5.1
+```{r}
+polls_us_election_2016 %>%
+count(pollster)
+
+polls_us_election_2016 %>%
+  group_by(pollster) %>%
+  summarise(pollster_n=n())
 
 ```
 
+5.2
+```{r}
+polls_us_election_2016 %>% 
+  group_by(grade)%>%
+  filter(state=="Florida")%>%
+  summarise(mean=mean(samplesize))
+```
+
+5.3
+```{r}
+polls_us_election_2016 %>% 
+  group_by(pollster)%>%
+  count(grade)
+```
+It seems so?
+
+5.4
+```{r}
+polls_us_election_2016 %>% 
+  group_by(state)%>%
+  arrange(rawpoll_mcmullin)
+```
+5.5
+```{r}
+polls_us_election_2016 %>%
+  group_by(state) %>%
+	summarize(pollster_n=n()) %>%
+	filter(pollster_n>10) %>%
+  arrange(desc(pollster_n))
+```
+5.65
+```{r}
+  polls_us_election_2016 %>%
+	group_by(grade,population) %>%
+	summarize(max_n=max(rawpoll_trump),min_n=min(rawpoll_trump)) %>%
+  arrange(desc(max_n), desc(min_n))
+
+```
+
+5.7
+```{r}
+polls_us_election_2016 %>%
+  group_by(state) %>%
+	summarize(pollster_n=n()) %>%
+  filter(state =="Alabama" | state == "Arkansas") %>%
+  arrange(desc(pollster_n))
+```
+
+
+
+6.1
+```{r}
+
+```
 
 
 
