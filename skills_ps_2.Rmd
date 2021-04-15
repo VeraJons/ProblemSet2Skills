@@ -125,13 +125,44 @@ Nothing changes if you repeat the sane variable multiple times
 
 2.3.2
 ```{r}
-select(polls_us_election_2016, contains("RAW", ignore.case=FALSE))
-ignore.case?
+select(polls_us_election_2016, contains("RAW",ignore.case = TRUE))
 ```
 2.3.3
 ```{r}
+select(polls_us_election_2016, contains("clinton") | contains("trump"))
+select(polls_us_election_2016,rawpoll_clinton:rawpoll_trump | adjpoll_clinton:adjpoll_trump )
+select(polls_us_election_2016,rawpoll_clinton:adjpoll_trump &-rawpoll_johnson & -rawpoll_mcmullin)
+```
+
+3.1
+```{r}
+polls_us_election_2016 %>% arrange(desc(rawpoll_clinton))%>%head(1)
+```
+3.2
+```{r}
+polls_us_election_2016 %>% arrange(desc(samplesize))%>%head(5)
+```
+3.3
+```{r}
+polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_johnson)))
+polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_clinton)))
 
 ```
+4.1
+```{r}
+df <- polls_us_election_2016 %>% 
+  mutate(raw_trump=rawpoll_trump/100*samplesize) %>%       
+  mutate(raw_clinton=rawpoll_clinton/100*samplesize) %>%
+   mutate(raw_johnson=rawpoll_johnson/100*samplesize) %>%       
+  mutate(raw_mcmullin=rawpoll_mcmullin/100*samplesize)
+
+df
+```
+4.2
+```{r}
+
+```
+
 
 
 
