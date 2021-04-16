@@ -133,7 +133,7 @@ Here we will only get the N/A columns.
 ```{r}
 select(polls_us_election_2016, grade, grade, grade)
 ```
-Nothing changes if you repeat the sane variable multiple times
+Nothing changes if you repeat the same variable multiple times or if you only name the variable once.
 
 2.3.2
 ```{r}
@@ -154,12 +154,19 @@ polls_us_election_2016 %>% arrange(desc(rawpoll_clinton))%>%head(1)
 ```{r}
 polls_us_election_2016 %>% arrange(desc(samplesize))%>%head(5)
 ```
+"#$how to make other columns go away??"#$
 3.3
 ```{r}
 polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_johnson)))
 polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_clinton)))
+polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_trump)))
+polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_mcmullin)))
+
+
 
 ```
+You put the poll you want to observe within the brackets of is.na()
+
 4.1
 ```{r}
 rawcandidate <- polls_us_election_2016 %>% 
