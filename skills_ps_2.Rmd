@@ -18,10 +18,17 @@ library(dplyr)
 1 Git Concepts
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-# git is a software for distributed version control. List 4 benefits of 
-# distributed version control.
-?git
+
 ```
+
+git is a software for distributed version control. List 4 benefits of distributed version control
+-good way to cooperate with others especially when many are working on code or projects
+-good way to be able to reinstate old versions
+-good way to back up work
+-good way to keep track of big projects and to make sure everybody is using the same version
+-use branches to safely experiment with projects with out destroying the original project
+
+
 2.1  Debugging mindset
 2.1.1
 ```{r}
@@ -47,7 +54,7 @@ filter(polls_us_election_2016, as.numeric(grade) > 3)
 ```
 2.1.3.Press Alt (Option) + Shift + K. What happens? How can you get to the same place using the menus?
 ```{r}
-#Alt (Option) + Shift + K shows us a preview of Keyboard Shortcut Quick References
+#Alt (Option) + Shift + K shows us a preview of Keyboard Shortcut Quick References. In order to do this from menus you need to go to tools-->keyboard shortcuts. 
 ```
 
 2.2  Filter 
@@ -62,7 +69,8 @@ filter(polls_us_election_2016, samplesize > 500)
 ```
 2.2.1.3
 ```{r}
-filter(polls_us_election_2016, as.numeric(pollster) == 194 | 63 | 160)
+pd <- c("YouGov", "Google Consumer Surveys", "SurveyMonkey")
+filter(polls_us_election_2016, pollster %in% pd)
 
 ```
 2.2.1.4
@@ -79,27 +87,31 @@ filter(polls_us_election_2016, rawpoll_trump >= rawpoll_clinton + 10)
 ```
 2.2.1.7
 ```{r}
-filter(polls_us_election_2016, rawpoll_mcmullin =5)
+filter(polls_us_election_2016, rawpoll_mcmullin > 5)
 ```
 
 2.2.2.1
 ```{r}
 filter(polls_us_election_2016, rawpoll_trump > 60 & startdate>="2016-01-01" & startdate<="2016-01-31")
 ```
+This is the poll.
+
 2.2.2.1
 ```{r}
 filter(polls_us_election_2016, is.na(grade))
 ```
+you need to change it to is.na. Otherwise R Studio won't understand your function
+
 2.2.2.2
 ```{r}
 filter(polls_us_election_2016, is.na(rawpoll_mcmullin))
 
 ```
-4,178 rows withh McMullin are n/a. McMullin may not be very popular in the race so they do not keep very accurate polls on his statistics. 
+4,178 rows withh McMullin are n/a. McMullin may not be very popular in the race so they do not keep very accurate polls on his statistics. He is therefore missing from very many polls.
 
 2.2.2.3
 ```{r}
-filter(polls_us_election_2016, as.numeric(grade) == 10)
+filter(polls_us_election_2016, as.numeric(grade) == 9)
 ```
 There is no n/a that comes up when we search specifically for a particular letter grade.
 #*Think about what hint is supposed to mean*#
