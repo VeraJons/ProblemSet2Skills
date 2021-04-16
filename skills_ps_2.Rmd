@@ -5,11 +5,15 @@ date: "4/12/2021"
 output:
   pdf_document: default
   html_document: default
+  Number of late coins used: 1
+  Collaborated with: Ryan McGinnis
 ---
 
+
+
+
 ```{r}
-tinytex::reinstall_tinytex()
-library(tinytex)
+
 library(ggplot2)
 library(dslabs)
 library(tidyverse)
@@ -22,22 +26,23 @@ library(dplyr)
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
+
 1 List 4 benefits
 git is a software for distributed version control. List 4 benefits of distributed version control
 -good way to cooperate with others especially when many are working on code or projects
 -good way to be able to reinstate old versions
 -good way to back up work
 -good way to keep track of big projects and to make sure everybody is using the same version
--use branches to safely experiment with projects with out destroying the original project
 
-i. What is the remote repository fir this homework?
+
+i. What is the remote repository for this homework?
 The remote repository for this homework the common class repository which we use to exchange any changes to our R Studio files. The remote repository is stored in GitHub Desktop. It is called datasci-harris/git-github-basics(studentname). Each student has their own private repository.
 
 ii. How do you add a file to staging in github?
-You need to press Staged and then it will automatically become staged. Then you should press Commit and push for it to come fully into github.
+You need to press Staged and then it will automatically become staged. Then you should press Commit and then push for it to go fully into github.
 
 iii. How do you commit an issue to the local repository?
-First you need to make sure your file is connected to your repository before you start editing the file. You find the link for the file at GitHub Desktop. Then you go to File -> New Prokect -> Version Control -> Git and you paste the link. Then each time you need to go to Git ->  staged -> commit. Then you also need to remember to select push.
+First you need to make sure you start a new project which has version control.Then you make sure that the file/project is connected to your repository before you start editing the file. You find the link for the file at GitHub Desktop. Then you go to File -> New Prokect -> Version Control -> Git and you paste the link. Then each time you need to go to Git ->  staged -> commit. Then you also need to remember to select push to push the file to github.
 
 iv. How does github desktop decide what part of your code to show in the main part of the window?
 Github chooses the most up to date code to show at each time. It chooses the code I upload when I select Commit and Push. 
@@ -54,7 +59,8 @@ There would be a new branch and it may be that the remote repository will now be
 c. what changes, if anything?
 There is an extra branch and the data could start floating around between two locations if we're not careful
 d. why would you want to work on a different branch?
-Perhaps it will help organize different projects and problem sets or keep two different versions of the data.
+Perhaps it will help organize different projects and problem sets or keep two different versions of the data. it is good to use branches to safely experiment with projects with out destroying the original project
+
 
 2.1  Debugging mindset
 2.1.1
@@ -75,11 +81,14 @@ ggplot(data = polls_us_election_2016) +
   geom_point(mapping = aes(x = startdate,
                            y = rawpoll_trump))
 
-filter(polls_us_election_2016, state == "Florida")
-filter(polls_us_election_2016, as.numeric(grade) > 3)
+filter(polls_us_election_2016, state == "Florida") %>% head()
+filter(polls_us_election_2016, as.numeric(grade) > 3) %>% head()
 
 ```
-2.1.3.Press Alt (Option) + Shift + K. What happens? How can you get to the same place using the menus?
+
+2.1.3.Press Alt (Option) + Shift + K. What happens? How can you get to the same place using the 
+menus?
+
 ```{r}
 #Alt (Option) + Shift + K shows us a preview of Keyboard Shortcut Quick References. In order to do this from menus you need to go to tools-->keyboard shortcuts. 
 ```
@@ -88,16 +97,15 @@ filter(polls_us_election_2016, as.numeric(grade) > 3)
 2.2.1. Using the polls_us_election_2016data frame in the ds labs package find the following
 2.2.1.1. Polls for the states of Hawaii and Alaska
 ```{r}
-filter(polls_us_election_2016, state == "Alaska" | state == "Hawaii")
+filter(polls_us_election_2016, state == "Alaska" | state == "Hawaii") %>% head(10)
 ```
 2.2.1.2
 ```{r}
-filter(polls_us_election_2016, samplesize > 500)
+filter(polls_us_election_2016, samplesize > 500)%>% head(10)
 ```
 2.2.1.3
 ```{r}
-pd <- c("YouGov", "Google Consumer Surveys", "SurveyMonkey")
-pdd <- filter(polls_us_election_2016, pollster %in% pd)
+pdd <- filter(polls_us_election_2016, pollster =="YouGov"|pollster =="Google Consumer Surveys"|pollster =="SurveyMonkey")
 head(pdd)
 
 ```
@@ -107,15 +115,15 @@ filter(polls_us_election_2016, as.numeric(grade) == 10 & rawpoll_trump<30)
 ```
 2.2.1.5
 ```{r}
-filter(polls_us_election_2016, adjpoll_clinton >=40 & adjpoll_clinton <=60 )
+filter(polls_us_election_2016, adjpoll_clinton >=40 & adjpoll_clinton <=60)%>% head()
 ```
 2.2.1.6
 ```{r}
-filter(polls_us_election_2016, rawpoll_trump >= rawpoll_clinton + 10)
+filter(polls_us_election_2016, rawpoll_trump >= rawpoll_clinton + 10)%>% head()
 ```
 2.2.1.7
 ```{r}
-filter(polls_us_election_2016, rawpoll_mcmullin > 5)
+filter(polls_us_election_2016, rawpoll_mcmullin > 5)%>% head()
 ```
 
 2.2.2.1
@@ -126,52 +134,52 @@ This is the poll.
 
 2.2.2.1
 ```{r}
-filter(polls_us_election_2016, is.na(grade))
+filter(polls_us_election_2016, is.na(grade))%>% head()
 ```
 you need to change it to is.na. Otherwise R Studio won't understand your function
 
 2.2.2.2
 ```{r}
-filter(polls_us_election_2016, is.na(rawpoll_mcmullin))
+filter(polls_us_election_2016, is.na(rawpoll_mcmullin))%>% head(10)
 
 ```
 4,178 rows withh McMullin are n/a. McMullin may not be very popular in the race so they do not keep very accurate polls on his statistics. He is therefore missing from very many polls.
 
 2.2.2.3
 ```{r}
-filter(polls_us_election_2016, as.numeric(grade) == 9)
+filter(polls_us_election_2016, as.numeric(grade) == 9)%>% head(10)
 ```
 There is no n/a that comes up when we search specifically for a particular letter grade.
 
 
 2.2.2.4
 ```{r}
-filter(polls_us_election_2016,  is.na(grade) | as.numeric(grade)>0)
+filter(polls_us_election_2016,  is.na(grade) | as.numeric(grade)>0)%>% head(10)
 ```
 It leads to printing of all columns with every possible grade and n/a as well.
 
 2.2.2.5
 ```{r}
-filter(polls_us_election_2016,  is.na(grade) | as.numeric(grade) == 0)
+filter(polls_us_election_2016,  is.na(grade) | as.numeric(grade) == 0)%>% head(10)
 
 ```
 Here we will only get the N/A columns.
 
 2.3.1
 ```{r}
-select(polls_us_election_2016, grade, grade, grade)
+select(polls_us_election_2016, grade, grade, grade)%>% head(10)
 ```
 Nothing changes if you repeat the same variable multiple times or if you only name the variable once.
 
 2.3.2
 ```{r}
-select(polls_us_election_2016, contains("RAW",ignore.case = TRUE))
+select(polls_us_election_2016, contains("RAW",ignore.case = TRUE))%>% head(10)
 ```
 2.3.3
 ```{r}
-select(polls_us_election_2016, contains("clinton") | contains("trump"))
-select(polls_us_election_2016,rawpoll_clinton:rawpoll_trump | adjpoll_clinton:adjpoll_trump )
-select(polls_us_election_2016,rawpoll_clinton:adjpoll_trump &-rawpoll_johnson & -rawpoll_mcmullin)
+select(polls_us_election_2016, contains("clinton") | contains("trump"))%>% head(10)
+select(polls_us_election_2016,rawpoll_clinton:rawpoll_trump | adjpoll_clinton:adjpoll_trump )%>% head(10)
+select(polls_us_election_2016,rawpoll_clinton:adjpoll_trump &-rawpoll_johnson & -rawpoll_mcmullin)%>% head(10)
 ```
 
 3.1
@@ -182,16 +190,13 @@ polls_us_election_2016 %>% arrange(desc(rawpoll_clinton))%>%head(1)
 ```{r}
 polls_us_election_2016 %>% arrange(desc(samplesize))%>%head(5)
 ```
-"#$how to make other columns go away??"#$
+
 3.3
 ```{r}
-polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_johnson)))
-polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_clinton)))
-polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_trump)))
-polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_mcmullin)))
-
-
-
+polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_johnson)))%>% head(10)
+polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_clinton)))%>% head(10)
+polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_trump)))%>% head(10)
+polls_us_election_2016 %>% arrange(desc(is.na(rawpoll_mcmullin)))%>% head(10)
 ```
 You put the poll you want to observe within the brackets of is.na()
 
@@ -203,7 +208,7 @@ rawcandidate <- polls_us_election_2016 %>%
    mutate(raw_johnson=rawpoll_johnson/100*samplesize) %>%       
   mutate(raw_mcmullin=rawpoll_mcmullin/100*samplesize)
 
-View(rawcandidate)
+View(rawcandidate)%>% head(10)
 ```
 
 4.2
@@ -238,7 +243,7 @@ polls_us_election_2016 %>%
  select(startdate, pollster, rawpoll_johnson) %>%
  group_by(startdate) %>%
  mutate(rank = min_rank(desc(rawpoll_johnson)),ties.method = 'first')%>%
-  head(20)
+  head(10)
 
 ```
 We break ties with the first row that comes up.
@@ -246,11 +251,13 @@ We break ties with the first row that comes up.
 5.1
 ```{r}
 polls_us_election_2016 %>%
-count(pollster)
+count(pollster)%>%
+head(10)
 
 polls_us_election_2016 %>%
   group_by(pollster) %>%
-  summarise(pollster_n=n())
+  summarise(pollster_n=n())%>%
+  head(10)
 
 ```
 
@@ -284,7 +291,7 @@ polls_us_election_2016 %>%
 	filter(pollster_n>10) %>%
   arrange(desc(pollster_n))
 ```
-5.65
+5.6
 ```{r}
   polls_us_election_2016 %>%
 	group_by(grade,population) %>%
@@ -316,13 +323,13 @@ They are running a total of 1106 polls in the United States excluding the polls 
 ```{r}
 df3 <- polls_us_election_2016%>%
   mutate(spread=(rawpoll_trump - rawpoll_clinton)/100)
-View(df3)
+df3 %>% head(10)
 
 df4 <- polls_us_election_2016%>%
   mutate(spread=(rawpoll_trump - rawpoll_clinton)/100) %>%
   group_by(pollster) %>%
 	summarize(spread, mean_spread_n=mean(spread))
-df4
+df4 %>% head(10)
 
 
 ```
@@ -332,7 +339,7 @@ df4
 df5 <- df3%>%
   mutate(p=(spread+1)/2)
   
-View(df5)
+View(df5 %>% head(10))
 
 ```
 
@@ -358,7 +365,7 @@ View(df7)
 ```{r}
 df8<- df7%>%
   mutate(error=spread-0.021)
-View(df8)
+View(df8 %>% head(10))
 
 ggplot(data = df8, aes(x = startdate, y = error, 
                        group = pollster))+
@@ -384,21 +391,3 @@ ggplot(data = df8, aes(x = error, y = pollster,
   theme(axis.text.x = element_text(angle = 90))+
   geom_point()
 ```
-
-
-
-
-2.2.2.1
-```{r}
-filter(polls_us_election_2016, rawpoll_trump > 60 & startdate>="2016-01-01" & startdate<="2016-01-31")
-```
-```{r}
-filter(polls_us_election_2016, is.na(grade))
-```
-2.2.2.2
-```{r}
-
-```
-
-
-
