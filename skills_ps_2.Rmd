@@ -253,12 +253,88 @@ polls_us_election_2016 %>%
   filter(state =="Alabama" | state == "Arkansas") %>%
   arrange(desc(pollster_n))
 ```
+```{r}
+polls_us_election_2016 %>%
+  group_by(state) %>%
+  filter(state !="Alabama" & state != "Arkansas") %>%
+  summarize(pollster_n=n()) %>%
+  arrange(desc(pollster_n))
+
+```
+
+They are running a total of 1106 polls in the United States excluding the polls in Alabama and Arkansas
+
+6.1.a
+```{r}
+df3 <- polls_us_election_2016%>%
+  mutate(spread=(rawpoll_trump - rawpoll_clinton)/100)
+View(df3)
+
+df4 <- polls_us_election_2016%>%
+  mutate(spread=(rawpoll_trump - rawpoll_clinton)/100) %>%
+  group_by(pollster) %>%
+	summarize(spread, mean_spread_n=mean(spread))
+df4
 
 
+```
 
-6.1
+6.1.b.a
+```{r}
+df5 <- df3%>%
+  mutate(p=(spread+1)/2)
+  
+View(df5)
+
+```
+
+
+6.1.b.b
 ```{r}
 
+df6 <- df5%>%
+  mutate(sd=2*sqrt((p*(1-p)/samplesize)))
+View(df6)
+  
+```
+It's true because this is a typical proportional sample and the two candidates dominate.
+
+6.1.b.c
+```{r}
+df7 <-df6%>%
+  mutate(lci=spread-qnorm(0.975)*sd) %>%
+  mutate(uci=spread+qnorm(0.975)*sd) 
+View(df7)
+```
+6.1.c
+```{r}
+df8<- df7%>%
+  mutate(error=spread-0.021)
+View(df8)
+
+ggplot(data = df8, aes(x = startdate, y = error, 
+                       group = pollster))+
+  geom_point()
+```
+```{r}
+
+
+ggplot(data = df8, aes(x = pollster, y = error, 
+                       group = pollster))+
+  geom_point()
+```
+```{r, fig.width=10,fig.height=25}
+ggplot(data = df8, aes(x = error, y = pollster, 
+                       group = pollster))+
+  theme(axis.text.x = element_text(angle = 90))+
+  geom_point()
+```
+
+```{r, fig.width=10,fig.height=25}
+ggplot(data = df8, aes(x = error, y = pollster, 
+                       group = pollster))+
+  theme(axis.text.x = element_text(angle = 90))+
+  geom_point()
 ```
 
 
