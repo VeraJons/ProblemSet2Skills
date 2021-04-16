@@ -33,8 +33,9 @@ The remote repository for this homework the common class repository which we use
 
 ii.
 
+
 iii. How do you commit an issue to the local repository?
-First you need to make sure your file is connected to your repository before you start editing the file. You find the link for the file at GitHub Desktop. Then you go to File -> New Prokect -> Version Control -> Git and you paste the link. Then each time you need to go to Git ->  staged -> commit
+First you need to make sure your file is connected to your repository before you start editing the file. You find the link for the file at GitHub Desktop. Then you go to File -> New Prokect -> Version Control -> Git and you paste the link. Then each time you need to go to Git ->  staged -> commit. Then you also need to remember to select push.
 
 iv.
 
