@@ -8,7 +8,7 @@ output:
 ---
 
 ```{r}
-tinytex::install_tinytex()
+tinytex::reinstall_tinytex()
 library(tinytex)
 library(ggplot2)
 library(dslabs)
@@ -142,7 +142,7 @@ filter(polls_us_election_2016, is.na(rawpoll_mcmullin))
 filter(polls_us_election_2016, as.numeric(grade) == 9)
 ```
 There is no n/a that comes up when we search specifically for a particular letter grade.
-#*Think about what hint is supposed to mean*#
+
 
 2.2.2.4
 ```{r}
@@ -218,7 +218,7 @@ ggplot(data = df1,
 ```
 4.3
 ```{r}
-df2<- df%>%
+df2 <- df1%>%
   mutate(new_variable = samplesize-(raw_trump+raw_clinton+raw_johnson+raw_mcmullin))
 ggplot(data = df2,
        mapping = aes(x = startdate,
