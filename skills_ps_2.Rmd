@@ -8,6 +8,7 @@ output: html_document
 ```{r}
 install.packages("dslabs")
 install.packages("ggplot2")
+install.packages("tidyverse")
 library(ggplot2)
 library(dslabs)
 library(tidyverse)
@@ -86,7 +87,8 @@ filter(polls_us_election_2016, samplesize > 500)
 2.2.1.3
 ```{r}
 pd <- c("YouGov", "Google Consumer Surveys", "SurveyMonkey")
-filter(polls_us_election_2016, pollster %in% pd)
+pdd <- filter(polls_us_election_2016, pollster %in% pd)
+head(pdd)
 
 ```
 2.2.1.4
