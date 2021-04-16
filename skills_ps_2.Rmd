@@ -20,13 +20,28 @@ library(dplyr)
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
-
+1 List 4 benefits
 git is a software for distributed version control. List 4 benefits of distributed version control
 -good way to cooperate with others especially when many are working on code or projects
 -good way to be able to reinstate old versions
 -good way to back up work
 -good way to keep track of big projects and to make sure everybody is using the same version
 -use branches to safely experiment with projects with out destroying the original project
+
+i. What is the remote repository fir this homework?
+The remote repository for this homework the common class repository which we use to exchange any changes to our R Studio files. The remote repository is stored in GitHub Desktop. It is called datasci-harris/git-github-basics(studentname). Each student has their own private repository.
+
+ii.
+
+iii. How do you commit an issue to the local repository?
+First you need to make sure your file is connected to your repository before you start editing the file. You find the link for the file at GitHub Desktop. Then you go to File -> New Prokect -> Version Control -> Git and you paste the link. Then each time you need to go to Git ->  staged -> commit
+
+iv.
+
+v.
+
+vi.
+
 
 
 2.1  Debugging mindset
@@ -175,8 +190,9 @@ rawcandidate <- polls_us_election_2016 %>%
    mutate(raw_johnson=rawpoll_johnson/100*samplesize) %>%       
   mutate(raw_mcmullin=rawpoll_mcmullin/100*samplesize)
 
-rawcandidate
+View(rawcandidate)
 ```
+
 4.2
 ```{r}
 df1 <- rawcandidate %>% 
@@ -198,7 +214,7 @@ ggplot(data = df2,
   geom_smooth(se=TRUE)
 ```
 4.4
-The reason why is because Johnson is such a big candidate and he polled very well close to the election. We also need to take McMuller out of the picture although he was less significant. He polled very well in Utah for example with 21.5 percent of the votes and third in Idaho.
+The reason why is because Johnson is  a big candidate and he polled very well close to the election. We also need to take McMuller out of the picture although he was less significant. He polled very well in Utah for example with 21.5 percent of the votes and third in Idaho.
 
 4.5
 Ths mostly fixes the problem since Johnson was such a big candidate and when he is out of the picture, there is very little disturbing the data.
