@@ -2,13 +2,14 @@
 title: "ProblemSet2Skills"
 author: "Vera Jónsdóttir"
 date: "4/12/2021"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r}
-install.packages("dslabs")
-install.packages("ggplot2")
-install.packages("tidyverse")
+tinytex::install_tinytex()
+library(tinytex)
 library(ggplot2)
 library(dslabs)
 library(tidyverse)
@@ -32,19 +33,28 @@ git is a software for distributed version control. List 4 benefits of distribute
 i. What is the remote repository fir this homework?
 The remote repository for this homework the common class repository which we use to exchange any changes to our R Studio files. The remote repository is stored in GitHub Desktop. It is called datasci-harris/git-github-basics(studentname). Each student has their own private repository.
 
-ii.
-
+ii. How do you add a file to staging in github?
+You need to press Staged and then it will automatically become staged. Then you should press Commit and push for it to come fully into github.
 
 iii. How do you commit an issue to the local repository?
 First you need to make sure your file is connected to your repository before you start editing the file. You find the link for the file at GitHub Desktop. Then you go to File -> New Prokect -> Version Control -> Git and you paste the link. Then each time you need to go to Git ->  staged -> commit. Then you also need to remember to select push.
 
-iv.
-
-v.
-
-vi.
+iv. How does github desktop decide what part of your code to show in the main part of the window?
+Github chooses the most up to date code to show at each time. It chooses the code I upload when I select Commit and Push. 
 
 
+v. What branch are you on right now?
+Currently I have only one branch for this Problem Set which is the main branch.
+
+vi. If you were to click on "current branch", type a name and click the "New Branch" button, you would create a new branch
+a. What would happen to the files in your working directory?
+They may move between branches and there will be a new version of my code in the data. You must be careful to be in the correct branch at each time.
+b. what would happens in the remote repo?
+There would be a new branch and it may be that the remote repository will now be able to find it.
+c. what changes, if anything?
+There is an extra branch and the data could start floating around between two locations if we're not careful
+d. why would you want to work on a different branch?
+Perhaps it will help organize different projects and problem sets or keep two different versions of the data.
 
 2.1  Debugging mindset
 2.1.1
@@ -208,8 +218,8 @@ ggplot(data = df1,
 ```
 4.3
 ```{r}
-df2 <- df %>% 
-  mutate(new_variable=samplesize-(raw_trump+raw_clinton+raw_johnson+raw_mcmullin))
+df2<- df%>%
+  mutate(new_variable = samplesize-(raw_trump+raw_clinton+raw_johnson+raw_mcmullin))
 ggplot(data = df2,
        mapping = aes(x = startdate,
                      y = new_variable)) +
